@@ -26,11 +26,9 @@ app.get('/keyword/:search/limit/:max', (req, res) => {
             (JSON.stringify(f).toLowerCase().indexOf(search) !== -1)
         )
 
-
         if(maxResults > g.length || maxResults == '0'){  
             maxResults = g.length
         }
-
 
         let count = 0;
         limited = []
@@ -38,7 +36,6 @@ app.get('/keyword/:search/limit/:max', (req, res) => {
             limited.push(g[count])
             count++
         }
-
         res.send(limited)
     }else{
         console.log("Limit must be a number")
