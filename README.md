@@ -54,7 +54,7 @@ Demo : https://tickersearch.surge.sh/
 
 ```
 
->## **Ability to limit**
+## **Ability to limit**
 you can make request like this format below `<Base_url>/keyword/[KEYWORD_SEARCH]/limit/[NUMBER]`
 
 eg : `https://ticker-2e1ica8b9.now.sh/keyword/goog/limit/1`
@@ -64,14 +64,14 @@ eg : `https://ticker-2e1ica8b9.now.sh/keyword/goog/limit/1`
 {"results":[{"symbol":"GOOG","name":"Alphabet Inc."}],"message":""}
 ```
 
->## **Ability to add new tickers to the filesystem**
+## **Ability to add new tickers to the filesystem**
 
 you can make request like this format below 
 `<Base_url>/add/[symbol]/[name]`
 
 eg : `https://ticker-2e1ica8b9.now.sh/add/META/thenewfacebookInc`
 
->## **Ability to delete a ticker from the filesystem**
+## **Ability to delete a ticker from the filesystem**
 
 you can make request like this format below 
 `<Base_url>/delete/[symbol]`
