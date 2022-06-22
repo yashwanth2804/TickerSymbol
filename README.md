@@ -37,12 +37,31 @@ Demo : https://tickersearch.surge.sh/
 
 #### In order to get the required search result , please provide `KEYWORD_SEARCH` in the following url
 
- `https://ticker-2e1ica8b9.now.sh//keyword/KEYWORD_SEARCH`
+ `https://ticker-2e1ica8b9.now.sh//keyword/[KEYWORD_SEARCH]`
  eg : `https://ticker-2e1ica8b9.now.sh/keyword/googl`
  
 #### output 
 
-`[{"symbol":"GOOGL","name":"Alphabet Inc."}]`
+```
+{
+"results":
+   [
+    {"symbol":"GOOG","name":"Alphabet Inc."},
+    {"symbol":"GOOGL","name":"Alphabet Inc."}
+    ]
+}
+
+```
+
+>### **Ability to Limit**
+`<Base_url>/keyword/[KEYWORD_SEARCH]/limit/[NUMBER]`
+
+eg : `https://ticker-2e1ica8b9.now.sh/keyword/goog/limit/1`
+
+#### output
+```
+{"results":[{"symbol":"GOOG","name":"Alphabet Inc."}]}
+```
 
 
 Pros

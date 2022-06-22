@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 
 
 app.get('/keyword/:search/limit/:max', (req, res) => {
-    console.log("--------/keyword-----------"+req.params.search+"---limit:"+req.params.max)
+    console.log("--------/keyword-with-Limit-applied-----------"+req.params.search+"---limit:"+req.params.max)
     let search = req.params.search;
     let maxResults = Number.parseInt(req.params.max)
     console.log(maxResults)
@@ -36,10 +36,10 @@ app.get('/keyword/:search/limit/:max', (req, res) => {
             limited.push(g[count])
             count++
         }
-        res.send(limited)
+        res.status(200).json({results:limited});
     }else{
         console.log("Limit must be a number")
-        res.send("Limit must be a number")
+        res.status(400).json({message:"Limit must be a number"});
     }
     res.end()
 })
@@ -53,7 +53,7 @@ app.get('/keyword/:search', (req, res) => {
         (JSON.stringify(f).toLowerCase().indexOf(search) !== -1)
        )
 
-    res.send(g)
+    res.status(200).json({results:g});
     res.end()
 })
 
