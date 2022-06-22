@@ -48,19 +48,41 @@ Demo : https://tickersearch.surge.sh/
    [
     {"symbol":"GOOG","name":"Alphabet Inc."},
     {"symbol":"GOOGL","name":"Alphabet Inc."}
-    ]
+    ],
+ "message":""
 }
 
 ```
 
->### **Ability to Limit**
-`<Base_url>/keyword/[KEYWORD_SEARCH]/limit/[NUMBER]`
+>## **Ability to limit**
+you can make request like this format below `<Base_url>/keyword/[KEYWORD_SEARCH]/limit/[NUMBER]`
 
 eg : `https://ticker-2e1ica8b9.now.sh/keyword/goog/limit/1`
 
 #### output
 ```
-{"results":[{"symbol":"GOOG","name":"Alphabet Inc."}]}
+{"results":[{"symbol":"GOOG","name":"Alphabet Inc."}],"message":""}
+```
+
+>## **Ability to add new tickers to the filesystem**
+
+you can make request like this format below 
+`<Base_url>/add/[symbol]/[name]`
+
+eg : `https://ticker-2e1ica8b9.now.sh/add/META/thenewfacebookInc`
+
+>## **Ability to delete a ticker from the filesystem**
+
+you can make request like this format below 
+`<Base_url>/delete/[symbol]`
+
+eg : `https://ticker-2e1ica8b9.now.sh/delete/META`
+
+> **NOTE** : Both Ticker add and delete needs a server re-start unless you are using any nodemon or similar. 
+
+## **To run the Project**
+```
+npm i && npm start
 ```
 
 

@@ -37,10 +37,10 @@ app.get('/keyword/:search/limit/:max', (req, res) => {
             limited.push(g[count])
             count++
         }
-        res.status(200).json({results:limited});
+        res.status(200).json({results:[limited],message:""});
     }else{
         console.log("Limit must be a number")
-        res.status(400).json({message:"Limit must be a number"});
+        res.status(400).json({results:[],message:"Limit must be a number"});
     }
     res.end()
 })
@@ -53,11 +53,13 @@ app.get('/keyword/:search', (req, res) => {
     const g  =Ticker.TickerSymbols.filter( f => 
         (JSON.stringify(f).toLowerCase().indexOf(search) !== -1)
        )
-    res.status(200).json({results:g});
+    res.status(200).json({results:g,message:""});
     res.end()
 })
 
 app.get('/add/:symbol/:name', (req, res) => {
+    // Example 
+    // {"symbol":"A","name":"Agilent Technologies Inc."}
     console.log("--------/symbol-----------"+req.params.symbol)
     console.log("--------/name-----------"+req.params.name)
     let symbol = req.params.symbol;
@@ -73,7 +75,8 @@ app.get('/add/:symbol/:name', (req, res) => {
        ) 
     if (!isDuplicate.length){
         // ADD NEW OBJECT
-        newArray.push({symbol:symbol.toUpperCase(), name:name})
+        const new_Symbol = {symbol:symbol.toUpperCase(), name:name};
+        newArray.push(new_Symbol)
         // SORT
         newArray.sort((a,b) => (a.symbol > b.symbol) ? 1 : ((b.symbol > a.symbol) ? -1 : 0))
         // WRITE TO FILE
@@ -81,10 +84,10 @@ app.get('/add/:symbol/:name', (req, res) => {
             if (err) throw err;
             console.log('The file has been saved!');
         });
-        res.send("added, please restart server")
+        res.status(200).json({results:[new_Symbol],message:"Added, please restart server"});
     } else {
         console.log(isDuplicate)
-        res.send("duplicate")
+        res.status(400).json({results:[],message:"Symbol already found"});
     }
     res.end()
 })
@@ -100,13 +103,13 @@ app.get('/delete/:symbol', (req, res) => {
         )
     // CHECK IF VALUE IS NOT FOUND
     if (Ticker.TickerSymbols.length === newArray.length){
-        res.send("not found") 
+        res.status(400).json({results:[],message:"Requested Symbol not Found"});
     } else {
         fs.writeFile('./data.js', `const TickerSymbols = ${JSON.stringify(newArray)} \n\nexports.TickerSymbols = TickerSymbols;`, (err) => {
             if (err) throw err;
             console.log('The file has been saved!');
         });
-        res.send("deleted, please restart server")
+        res.status(200).json({results:[],message:`Deleted ${symbol} , please restart server`});
     }
     res.end()
 })
